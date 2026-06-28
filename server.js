@@ -4,6 +4,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const { WebSocketServer, WebSocket } = require('ws');
+const rateLimit = require('express-rate-limit');
 const auth = require('./src/auth');
 const game = require('./src/game');
 const db = require('./src/db');
@@ -14,28 +15,16 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ---- Simple in-memory rate limiter ----
-// Limits auth endpoints to maxRequests per windowMs per IP.
+// ---- Rate limiter for auth endpoints ----
+// Max 10 requests per IP per minute to prevent brute-force attacks.
 
-function createRateLimiter({ windowMs = 60_000, maxRequests = 10 } = {}) {
-  const hits = new Map(); // ip -> { count, resetAt }
-  return function rateLimiter(req, res, next) {
-    const ip = req.socket.remoteAddress || 'unknown';
-    const now = Date.now();
-    let record = hits.get(ip);
-    if (!record || now > record.resetAt) {
-      record = { count: 0, resetAt: now + windowMs };
-      hits.set(ip, record);
-    }
-    record.count += 1;
-    if (record.count > maxRequests) {
-      return res.status(429).json({ ok: false, message: 'Too many requests. Please wait and try again.' });
-    }
-    next();
-  };
-}
-
-const authLimiter = createRateLimiter({ windowMs: 60_000, maxRequests: 10 });
+const authLimiter = rateLimit({
+  windowMs: 60_000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { ok: false, message: 'Too many requests. Please wait and try again.' },
+});
 
 // ---- REST auth routes ----
 
