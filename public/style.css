@@ -1,0 +1,400 @@
+/* ============================================================
+   DikuMUD – Mobile-first CSS
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #0d0d1a;
+  --surface:     #1a1a2e;
+  --surface2:    #16213e;
+  --accent:      #e94560;
+  --accent2:     #0f3460;
+  --text:        #e0e0e0;
+  --text-dim:    #888;
+  --success:     #4caf50;
+  --error:       #e94560;
+  --border:      #2e2e4e;
+  --btn:         #0f3460;
+  --btn-hover:   #1a4a80;
+  --radius:      8px;
+  --font-mono:   'Courier New', Courier, monospace;
+  --font-ui:     system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  overflow: hidden;
+}
+
+/* ---- Screens ---- */
+
+.screen {
+  display: none;
+  height: 100%;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Auth screen ---- */
+
+#auth-screen {
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.logo {
+  font-size: 2rem;
+  text-align: center;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-panel {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tab-panel.active {
+  display: flex;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: -6px;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+input[type="text"],
+input[type="password"] {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  padding: 10px 12px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 4px;
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+}
+
+.error-msg {
+  color: var(--error);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+.success-msg {
+  color: var(--success);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+/* ---- Game screen ---- */
+
+#game-screen {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  height: 100dvh;
+}
+
+#game-screen.active {
+  display: flex;
+}
+
+/* Status bar */
+#status-bar {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+#stat-name {
+  font-weight: bold;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.stat-block {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.stat-label {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+#logout-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#logout-btn:hover {
+  color: var(--accent);
+}
+
+/* Output area */
+#output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.output-line {
+  margin-bottom: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.output-line.cmd {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.output-line.system {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* Direction pad */
+#dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 8px 10px 4px;
+  flex-shrink: 0;
+}
+
+.dir-btn {
+  background: var(--btn);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.dir-btn:active {
+  background: var(--btn-hover);
+}
+
+.center-btn {
+  font-size: 1rem;
+}
+
+/* Quick actions */
+#quick-actions {
+  display: flex;
+  gap: 6px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+}
+
+.quick-btn {
+  flex: 1;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.quick-btn:active {
+  background: var(--btn-hover);
+}
+
+/* Input bar */
+#input-bar {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px 10px;
+  flex-shrink: 0;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+}
+
+#cmd-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+#cmd-input:focus {
+  border-color: var(--accent);
+}
+
+#send-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+#send-btn:active {
+  opacity: 0.8;
+}
+
+/* ---- Scrollbar styling ---- */
+#output::-webkit-scrollbar {
+  width: 4px;
+}
+#output::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ---- Desktop layout adjustments ---- */
+@media (min-width: 600px) {
+  #auth-screen {
+    background: radial-gradient(ellipse at top, #1a1a2e 0%, #0d0d1a 70%);
+  }
+
+  #game-screen {
+    max-width: 640px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  #output {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #game-screen {
+    max-width: 860px;
+  }
+}

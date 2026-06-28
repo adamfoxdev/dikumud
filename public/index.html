@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>DikuMUD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="auth-screen" class="screen active">
+  <div class="auth-card">
+    <h1 class="logo">⚔️ DikuMUD</h1>
+    <p class="tagline">A text adventure for the ages</p>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="login">Login</button>
+      <button class="tab" data-tab="register">Register</button>
+    </div>
+
+    <!-- Login form -->
+    <form id="login-form" class="tab-panel active">
+      <label for="login-username">Username</label>
+      <input id="login-username" type="text" autocomplete="username" placeholder="Enter username" />
+      <label for="login-password">Password</label>
+      <input id="login-password" type="password" autocomplete="current-password" placeholder="Enter password" />
+      <button type="submit" class="btn-primary">Login</button>
+      <p id="login-error" class="error-msg"></p>
+    </form>
+
+    <!-- Register form -->
+    <form id="register-form" class="tab-panel">
+      <label for="reg-username">Username</label>
+      <input id="reg-username" type="text" autocomplete="username" placeholder="3–20 chars, letters/numbers/_" />
+      <label for="reg-password">Password</label>
+      <input id="reg-password" type="password" autocomplete="new-password" placeholder="At least 6 characters" />
+      <label for="reg-charname">Character Name <span class="hint">(optional – defaults to username)</span></label>
+      <input id="reg-charname" type="text" autocomplete="off" placeholder="Your adventurer's name" />
+      <button type="submit" class="btn-primary">Create Account</button>
+      <p id="reg-error" class="error-msg"></p>
+      <p id="reg-success" class="success-msg"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== GAME SCREEN ===== -->
+<div id="game-screen" class="screen">
+
+  <!-- Top status bar -->
+  <div id="status-bar">
+    <span id="stat-name">—</span>
+    <span class="stat-block">
+      <span class="stat-label">HP</span>
+      <span id="stat-hp">—</span>
+    </span>
+    <span class="stat-block">
+      <span class="stat-label">MP</span>
+      <span id="stat-mp">—</span>
+    </span>
+    <span class="stat-block">
+      <span class="stat-label">Lv</span>
+      <span id="stat-level">—</span>
+    </span>
+    <button id="logout-btn" title="Logout">⏻</button>
+  </div>
+
+  <!-- Output terminal -->
+  <div id="output" aria-live="polite" aria-label="Game output"></div>
+
+  <!-- Direction pad -->
+  <div id="dpad">
+    <button class="dir-btn" data-dir="northwest" title="Northwest">NW</button>
+    <button class="dir-btn" data-dir="north"     title="North">N</button>
+    <button class="dir-btn" data-dir="northeast" title="Northeast">NE</button>
+    <button class="dir-btn" data-dir="west"      title="West">W</button>
+    <button class="dir-btn center-btn" data-dir="look" title="Look">👁</button>
+    <button class="dir-btn" data-dir="east"      title="East">E</button>
+    <button class="dir-btn" data-dir="southwest" title="Southwest">SW</button>
+    <button class="dir-btn" data-dir="south"     title="South">S</button>
+    <button class="dir-btn" data-dir="southeast" title="Southeast">SE</button>
+    <button class="dir-btn" data-dir="up"        title="Up" style="grid-column: 1;">↑ U</button>
+    <button class="dir-btn" data-dir="down"      title="Down" style="grid-column: 3;">↓ D</button>
+  </div>
+
+  <!-- Quick-action buttons -->
+  <div id="quick-actions">
+    <button class="quick-btn" data-cmd="inventory">Inv</button>
+    <button class="quick-btn" data-cmd="stats">Stats</button>
+    <button class="quick-btn" data-cmd="help">Help</button>
+  </div>
+
+  <!-- Command input -->
+  <div id="input-bar">
+    <input id="cmd-input" type="text" autocomplete="off" autocorrect="off"
+           autocapitalize="none" spellcheck="false"
+           placeholder="Type a command…" />
+    <button id="send-btn">Send</button>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

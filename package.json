@@ -1,0 +1,30 @@
+{
+  "name": "dikumud",
+  "version": "1.0.0",
+  "description": "A text-based DikuMUD game with a mobile-friendly web interface, SQLite backend, and simple auth.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamfoxdev/dikumud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/adamfoxdev/dikumud/issues"
+  },
+  "homepage": "https://github.com/adamfoxdev/dikumud#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.11.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "ws": "^8.21.0"
+  }
+}
