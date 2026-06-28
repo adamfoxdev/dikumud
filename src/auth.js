@@ -5,7 +5,11 @@ const jwt = require('jsonwebtoken');
 const db = require('./db');
 
 const SALT_ROUNDS = 10;
-const JWT_SECRET = process.env.JWT_SECRET || 'dikumud-dev-secret-change-in-production';
+const DEFAULT_SECRET = 'dikumud-dev-secret-change-in-production';
+if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('JWT_SECRET environment variable must be set in production.');
+}
+const JWT_SECRET = process.env.JWT_SECRET || DEFAULT_SECRET;
 const JWT_EXPIRES_IN = '24h';
 
 const USERNAME_RE = /^[A-Za-z0-9_]{3,20}$/;

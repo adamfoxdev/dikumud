@@ -217,9 +217,9 @@ function handleServerMessage(msg) {
 // ---- Stats bar ----
 
 function updateStats(s) {
-  if (s.name)    statName.textContent  = s.name;
-  if (s.hp != null)     statHp.textContent   = `${s.hp}/${s.max_hp}`;
-  if (s.mp != null)     statMp.textContent   = `${s.mp}/${s.max_mp}`;
+  if (s.name != null)   statName.textContent  = s.name;
+  if (s.hp != null)     statHp.textContent    = `${s.hp}/${s.max_hp}`;
+  if (s.mp != null)     statMp.textContent    = `${s.mp}/${s.max_mp}`;
   if (s.level != null)  statLevel.textContent = s.level;
 }
 

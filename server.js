@@ -3,7 +3,7 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const { WebSocketServer } = require('ws');
+const { WebSocketServer, WebSocket } = require('ws');
 const auth = require('./src/auth');
 const game = require('./src/game');
 const db = require('./src/db');
@@ -73,7 +73,7 @@ wss.on('connection', (ws) => {
   let char = null;
 
   function send(payload) {
-    if (ws.readyState === ws.OPEN) {
+    if (ws.readyState === WebSocket.OPEN) {
       ws.send(JSON.stringify(payload));
     }
   }

@@ -36,7 +36,7 @@ const ROOMS = {
   },
   blacksmith: {
     id: 'blacksmith',
-    title: "Forge & Anvil – The Blacksmith's",
+    title: "Forge & Anvil - The Blacksmith's",
     description:
       'Heat radiates from a roaring forge. A muscled dwarf hammers rhythmically on a ' +
       'glowing sword blank. Tools and weapons hang from every wall. Sparks dance ' +
