@@ -12,7 +12,7 @@ const ROOMS = {
     title: 'Town Square',
     description:
       'You stand in the bustling town square of Midgaard. Cobblestones pave the ground ' +
-      'beneath your feet. A great fountain gurgles in the centre, its water sparkling in ' +
+      'beneath your feet. A great fountain gurgles in the center, its water sparkling in ' +
       'the light. Merchants call out their wares from canvas stalls lining the edges.',
     exits: { north: 'temple', east: 'market', south: 'south_road', west: 'inn' },
   },

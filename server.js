@@ -14,9 +14,32 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ---- Simple in-memory rate limiter ----
+// Limits auth endpoints to maxRequests per windowMs per IP.
+
+function createRateLimiter({ windowMs = 60_000, maxRequests = 10 } = {}) {
+  const hits = new Map(); // ip -> { count, resetAt }
+  return function rateLimiter(req, res, next) {
+    const ip = req.socket.remoteAddress || 'unknown';
+    const now = Date.now();
+    let record = hits.get(ip);
+    if (!record || now > record.resetAt) {
+      record = { count: 0, resetAt: now + windowMs };
+      hits.set(ip, record);
+    }
+    record.count += 1;
+    if (record.count > maxRequests) {
+      return res.status(429).json({ ok: false, message: 'Too many requests. Please wait and try again.' });
+    }
+    next();
+  };
+}
+
+const authLimiter = createRateLimiter({ windowMs: 60_000, maxRequests: 10 });
+
 // ---- REST auth routes ----
 
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', authLimiter, async (req, res) => {
   const { username, password, characterName } = req.body || {};
   try {
     const { userId } = await auth.register(username, password);
@@ -28,7 +51,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', authLimiter, async (req, res) => {
   const { username, password } = req.body || {};
   try {
     const result = await auth.login(username, password);
