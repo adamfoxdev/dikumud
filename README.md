@@ -27,11 +27,11 @@ A classic text-based MUD (Multi-User Dungeon) game with a **mobile-friendly web 
 # 1. Install dependencies
 npm install
 
-# 2. Start the server (default port 3000)
+# 2. Start the server (default port 8080)
 npm start
 
 # 3. Open a browser (desktop or mobile)
-open http://localhost:3000
+open http://localhost:8080
 ```
 
 Set `PORT` to change the listening port, and `JWT_SECRET` to a strong random string in production:
