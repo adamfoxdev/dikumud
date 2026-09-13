@@ -9,7 +9,8 @@ const auth = require('./src/auth');
 const game = require('./src/game');
 const db = require('./src/db');
 
-const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json());
@@ -142,8 +143,8 @@ wss.on('connection', (ws) => {
 // ---- Start ----
 
 if (require.main === module) {
-  server.listen(PORT, () => {
-    console.log(`DikuMUD server running at http://localhost:${PORT}`);
+  server.listen(PORT, HOST, () => {
+    console.log(`DikuMUD server running at http://${HOST}:${PORT}`);
   });
 }
 
